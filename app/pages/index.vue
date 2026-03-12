@@ -69,13 +69,8 @@ async function submitForm() {
     <header class="fixed top-0 inset-x-0 z-50 bg-white/90 backdrop-blur-md border-b border-slate-100">
       <div class="mx-auto max-w-6xl px-6 h-16 flex items-center justify-between">
         <!-- Logo -->
-        <a href="#" class="flex items-center gap-2.5 group">
-          <span class="flex items-center justify-center w-8 h-8 rounded-lg bg-blue-600 text-white">
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-              <path d="M2 8L6 2L10 8L14 4" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M2 12L6 8L10 12L14 8" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.5"/>
-            </svg>
-          </span>
+        <a href="#" class="flex items-center gap-2.5">
+          <InsulatorLogo :size="30" />
           <span class="font-bold text-slate-900 text-lg tracking-tight">Powerline Labs</span>
         </a>
 
@@ -133,8 +128,8 @@ async function submitForm() {
       <!-- Background grid pattern -->
       <div class="absolute inset-0 opacity-[0.04]" style="background-image: linear-gradient(#fff 1px, transparent 1px), linear-gradient(90deg, #fff 1px, transparent 1px); background-size: 40px 40px;"></div>
       <!-- Gradient orb -->
-      <div class="absolute -top-32 -right-32 w-[600px] h-[600px] rounded-full opacity-20" style="background: radial-gradient(circle, #3B82F6, transparent 70%);"></div>
-      <div class="absolute bottom-0 -left-16 w-[400px] h-[400px] rounded-full opacity-10" style="background: radial-gradient(circle, #6366F1, transparent 70%);"></div>
+      <div class="absolute -top-32 -right-32 w-150 h-150 rounded-full opacity-20" style="background: radial-gradient(circle, #3B82F6, transparent 70%);"></div>
+      <div class="absolute bottom-0 -left-16 w-100 h-100 rounded-full opacity-10" style="background: radial-gradient(circle, #6366F1, transparent 70%);"></div>
 
       <div class="relative mx-auto max-w-6xl px-6 text-center">
         <span class="inline-block text-xs font-semibold tracking-widest text-blue-400 uppercase mb-6 px-3 py-1 rounded-full border border-blue-500/30 bg-blue-500/10">
@@ -163,19 +158,35 @@ async function submitForm() {
           </a>
         </div>
 
-        <!-- Stats row -->
-        <div class="mt-20 grid grid-cols-3 gap-8 max-w-lg mx-auto border-t border-slate-800 pt-10">
-          <div>
-            <div class="text-3xl font-extrabold text-white">10+</div>
-            <div class="text-xs text-slate-500 mt-1 font-medium">Projects Shipped</div>
+        <!-- Value props row -->
+        <div class="mt-20 grid grid-cols-3 gap-6 max-w-2xl mx-auto border-t border-slate-800 pt-10">
+          <div class="flex flex-col items-center gap-2">
+            <div class="w-10 h-10 rounded-lg bg-slate-800 flex items-center justify-center">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#60A5FA" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/>
+                <rect x="5" y="17" width="6" height="7" rx="1" style="display:none"/>
+              </svg>
+            </div>
+            <div class="text-sm font-semibold text-white">Web &amp; Mobile</div>
+            <div class="text-xs text-slate-500 text-center leading-relaxed">One studio, all platforms</div>
           </div>
-          <div class="border-x border-slate-800">
-            <div class="text-3xl font-extrabold text-white">5+</div>
-            <div class="text-xs text-slate-500 mt-1 font-medium">Years Experience</div>
+          <div class="flex flex-col items-center gap-2 border-x border-slate-800">
+            <div class="w-10 h-10 rounded-lg bg-slate-800 flex items-center justify-center">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#60A5FA" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+              </svg>
+            </div>
+            <div class="text-sm font-semibold text-white">Direct Access</div>
+            <div class="text-xs text-slate-500 text-center leading-relaxed">You talk to the builder</div>
           </div>
-          <div>
-            <div class="text-3xl font-extrabold text-white">100%</div>
-            <div class="text-xs text-slate-500 mt-1 font-medium">Client Satisfaction</div>
+          <div class="flex flex-col items-center gap-2">
+            <div class="w-10 h-10 rounded-lg bg-slate-800 flex items-center justify-center">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#60A5FA" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+              </svg>
+            </div>
+            <div class="text-sm font-semibold text-white">Supported Long-term</div>
+            <div class="text-xs text-slate-500 text-center leading-relaxed">We stay after launch</div>
           </div>
         </div>
       </div>
@@ -205,7 +216,7 @@ async function submitForm() {
               Fast, scalable web apps built with modern frameworks. From SaaS platforms to internal tools, we deliver production-ready software that performs.
             </p>
             <ul class="mt-6 space-y-2">
-              <li v-for="item in ['Vue / React / Nuxt', 'REST & GraphQL APIs', 'Cloud-native deployment', 'SEO-ready architecture']" :key="item" class="flex items-center gap-2 text-sm text-slate-600">
+              <li v-for="item in ['Vue / React / Nuxt', 'REST APIs', 'Cloud-native deployment', 'SEO-ready architecture']" :key="item" class="flex items-center gap-2 text-sm text-slate-600">
                 <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="7" fill="#EFF6FF"/><path d="M4 7L6.5 9.5L10 5" stroke="#2563EB" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
                 {{ item }}
               </li>
@@ -224,26 +235,26 @@ async function submitForm() {
               Native-quality iOS and Android apps built with cross-platform tools. Ship to both app stores from a single, maintainable codebase.
             </p>
             <ul class="mt-6 space-y-2">
-              <li v-for="item in ['React Native / Expo', 'iOS & Android', 'Offline-first support', 'Push notifications']" :key="item" class="flex items-center gap-2 text-sm text-slate-600">
+              <li v-for="item in ['Capacitor', 'iOS & Android', 'Real-time updates', 'Push notifications']" :key="item" class="flex items-center gap-2 text-sm text-slate-600">
                 <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="7" fill="#EFF6FF"/><path d="M4 7L6.5 9.5L10 5" stroke="#2563EB" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
                 {{ item }}
               </li>
             </ul>
           </div>
 
-          <!-- Consulting -->
+          <!-- Hosting & Support -->
           <div class="group rounded-2xl border border-slate-200 p-8 hover:border-blue-200 hover:shadow-xl hover:shadow-blue-50 transition-all duration-300">
             <div class="w-12 h-12 rounded-xl bg-blue-50 flex items-center justify-center mb-6 group-hover:bg-blue-600 transition-colors">
               <svg class="text-blue-600 group-hover:text-white transition-colors" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M2 20h20M7 20V10M12 20V4M17 20v-6"/>
+                <rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/>
               </svg>
             </div>
-            <h3 class="text-xl font-bold text-slate-900 mb-3">Technical Consulting</h3>
+            <h3 class="text-xl font-bold text-slate-900 mb-3">Hosting &amp; Support</h3>
             <p class="text-slate-500 leading-relaxed text-sm">
-              Architecture reviews, tech stack decisions, and team augmentation. We help you make the right technical choices before you build.
+              We don't just build and disappear. We handle your hosting infrastructure and provide ongoing support to keep your app running smoothly.
             </p>
             <ul class="mt-6 space-y-2">
-              <li v-for="item in ['Architecture design', 'Code & security audits', 'Team training', 'CTO advisory']" :key="item" class="flex items-center gap-2 text-sm text-slate-600">
+              <li v-for="item in ['Cloud hosting setup', 'Uptime monitoring', 'Regular updates & maintenance', 'Priority bug fixes']" :key="item" class="flex items-center gap-2 text-sm text-slate-600">
                 <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="7" fill="#EFF6FF"/><path d="M4 7L6.5 9.5L10 5" stroke="#2563EB" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
                 {{ item }}
               </li>
@@ -297,7 +308,7 @@ async function submitForm() {
           <div class="hidden md:block absolute top-10 left-0 right-0 h-px bg-slate-200 mx-28"></div>
 
           <div class="grid md:grid-cols-4 gap-8">
-            <div v-for="(step, i) in [
+            <div v-for="(step) in [
               { num: '01', title: 'Discovery', body: 'We dig into your goals, users, and constraints to define the right scope.' },
               { num: '02', title: 'Design', body: 'UX wireframes and UI mockups aligned with your brand before a line of code is written.' },
               { num: '03', title: 'Build', body: 'Iterative development with weekly demos so you always see progress.' },
@@ -328,7 +339,7 @@ async function submitForm() {
 
             <div class="mt-10 space-y-6">
               <div class="flex items-start gap-4">
-                <div class="w-10 h-10 rounded-lg bg-slate-800 flex items-center justify-center flex-shrink-0">
+                <div class="w-10 h-10 rounded-lg bg-slate-800 flex items-center justify-center shrink-0">
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#60A5FA" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/>
                   </svg>
@@ -340,7 +351,7 @@ async function submitForm() {
               </div>
 
               <div class="flex items-start gap-4">
-                <div class="w-10 h-10 rounded-lg bg-slate-800 flex items-center justify-center flex-shrink-0">
+                <div class="w-10 h-10 rounded-lg bg-slate-800 flex items-center justify-center shrink-0">
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#60A5FA" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
                   </svg>
@@ -444,12 +455,7 @@ async function submitForm() {
     <footer class="bg-slate-950 text-slate-500 py-10">
       <div class="mx-auto max-w-6xl px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
         <div class="flex items-center gap-2.5">
-          <span class="flex items-center justify-center w-7 h-7 rounded-md bg-blue-600 text-white">
-            <svg width="13" height="13" viewBox="0 0 16 16" fill="none">
-              <path d="M2 8L6 2L10 8L14 4" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M2 12L6 8L10 12L14 8" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.5"/>
-            </svg>
-          </span>
+          <InsulatorLogo :size="22" />
           <span class="font-bold text-slate-400 text-sm">Powerline Labs</span>
         </div>
         <p class="text-xs">© {{ new Date().getFullYear() }} Powerline Labs. All rights reserved.</p>
