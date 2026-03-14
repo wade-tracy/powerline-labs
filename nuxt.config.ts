@@ -54,7 +54,8 @@ export default defineNuxtConfig({
   },
 
   runtimeConfig: {
-    resendApiKey: process.env.RESEND_API_KEY ?? '',
+    zohoEmail: process.env.ZOHO_EMAIL ?? '',
+    zohoPassword: process.env.ZOHO_PASSWORD ?? '',
     contactToEmail: process.env.CONTACT_TO_EMAIL ?? '',
   },
 })

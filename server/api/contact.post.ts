@@ -1,4 +1,4 @@
-import { Resend } from 'resend'
+import nodemailer from 'nodemailer'
 
 interface ContactBody {
   name: string
@@ -21,34 +21,43 @@ export default defineEventHandler(async (event) => {
     throw createError({ statusCode: 400, statusMessage: 'Invalid email address.' })
   }
 
-  if (!config.resendApiKey) {
-    // In development without a key, just log and return success
-    console.info('[contact] No RESEND_API_KEY set — logging message instead:')
+  if (!config.zohoEmail || !config.zohoPassword) {
+    // In development without credentials, just log and return success
+    console.info('[contact] No Zoho credentials set — logging message instead:')
     console.info({ ...body })
     return { success: true }
   }
 
-  const resend = new Resend(config.resendApiKey)
-  const toEmail = config.contactToEmail || 'hello@powerlinelabs.com'
-
-  const { error } = await resend.emails.send({
-    from: 'Powerline Labs Contact <noreply@powerlinelabs.com>',
-    to: toEmail,
-    replyTo: body.email,
-    subject: `New enquiry from ${body.name}${body.company ? ` (${body.company})` : ''}`,
-    html: `
-      <h2>New Contact Form Submission</h2>
-      <p><strong>Name:</strong> ${body.name}</p>
-      <p><strong>Email:</strong> <a href="mailto:${body.email}">${body.email}</a></p>
-      ${body.company ? `<p><strong>Company:</strong> ${body.company}</p>` : ''}
-      <hr>
-      <p><strong>Message:</strong></p>
-      <p style="white-space: pre-wrap;">${body.message}</p>
-    `,
+  const transporter = nodemailer.createTransport({
+    host: 'smtp.zoho.com',
+    port: 465,
+    secure: true,
+    auth: {
+      user: config.zohoEmail,
+      pass: config.zohoPassword,
+    },
   })
 
-  if (error) {
-    console.error('[contact] Resend error:', error)
+  const toEmail = config.contactToEmail || config.zohoEmail
+
+  try {
+    await transporter.sendMail({
+      from: `Powerline Labs Contact <${config.zohoEmail}>`,
+      to: toEmail,
+      replyTo: body.email,
+      subject: `New enquiry from ${body.name}${body.company ? ` (${body.company})` : ''}`,
+      html: `
+        <h2>New Contact Form Submission</h2>
+        <p><strong>Name:</strong> ${body.name}</p>
+        <p><strong>Email:</strong> <a href="mailto:${body.email}">${body.email}</a></p>
+        ${body.company ? `<p><strong>Company:</strong> ${body.company}</p>` : ''}
+        <hr>
+        <p><strong>Message:</strong></p>
+        <p style="white-space: pre-wrap;">${body.message}</p>
+      `,
+    })
+  } catch (err) {
+    console.error('[contact] Zoho SMTP error:', err)
     throw createError({ statusCode: 500, statusMessage: 'Failed to send message. Please try again.' })
   }
 
